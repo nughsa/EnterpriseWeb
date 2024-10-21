@@ -32,7 +32,7 @@
             <div class="container">
                 <h1>Edit Produk</h1>
                 <!-- Form to edit a new produk -->
-                <form action="{{url('produk/edit/' . $ubahproduk->kode_produk)}}" method="POST">
+                <form action="{{url('produk/edit/' . $ubahproduk->kode_produk)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -54,6 +54,13 @@
                         <label for="jumlah_produk">Jumlah Produk</label>
                         <input type="text" name="jumlah_produk" class="form-control" required value='{{$ubahproduk->jumlah_produk}}'>
                     </div>
+
+                    <div class="form-group">
+                        <label for="image">Gambar</label>
+                        <input type="file" name="image" class="form-control" required value='{{$ubahproduk->jumlah_produk}}'>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Edit</button>
 
                 </form>
             </div>
