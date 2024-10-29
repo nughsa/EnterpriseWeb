@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\produk;
 use App\Http\Requests\StoreprodukRequest;
 use App\Http\Requests\UpdateprodukRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -75,5 +76,24 @@ class ProdukController extends Controller
         ]);
 
         return redirect('/produk');
+    }
+
+    public function ViewLaporan()
+    {
+        // Mengambil semua data produk
+        $products = Produk::all();
+        return view('laporan', ['products' => $products]);
+    }
+
+    public function print()
+    {
+        // Mengambil semua data produk
+        $products = Produk::all();
+
+        // Load view untuk PDF dengan data produk
+        $pdf = Pdf::loadView('report', compact('products'));
+
+        // Menampilkan PDF langsung di browser
+        return $pdf->stream('laporan-produk.pdf');
     }
 }

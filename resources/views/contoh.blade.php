@@ -16,7 +16,7 @@
             <li><a href="{{url('contoh')}}">Home</a></li>
             <li><a href="{{url('produk')}}">Produk</a></li>
             <li><a href="#">Penjualan</a></li>
-            <li><a href="#">Laporan</a></li>
+            <li><a href="{{ url('laporan') }}">Laporan</a></li>
             <li><a href="#">Pengaturan</a></li>
         </ul>
     </div>
@@ -52,10 +52,18 @@
             A simple primary alert-chek it out!
         </div>
 
+        {{-- Sales chart --}}
         <div id="chart">
             <h2>Grafik Penjualan Bulanan</h2>
-            <canvas id="salesChart"></canvas>
+            {{-- <canvas id="salesChart"></canvas> --}}
+            {!! $chart->container()!!}
         </div>
     </div>
+
+    {{-- <script src="script.js"></script> --}}
+    {{-- Ini Script untuk memanggil larapex (wajib) --}}
+    <script src="{{ $chart->cdn() }}"></script>
+    {{ $chart->script()}}
+
 </body>
 </html>

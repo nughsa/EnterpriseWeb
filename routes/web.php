@@ -20,3 +20,6 @@ Route::post('/produk/add',[ProdukController::class,'CreateProduk']);
 Route::delete('/produk/delete/{kode_produk}', [ProdukController::class, 'DeleteProduk']);
 Route::get('/produk/edit/{kode_produk}', [ProdukController::class,'ViewEditProduk']);
 Route::put('/produk/edit/{kode_produk}', [ProdukController::class,'UpdateProduk']);
+
+Route::get('/laporan', [ProdukController::class, 'ViewLaporan']);
+Route::get('/report', [ProdukController::class, 'print']);
