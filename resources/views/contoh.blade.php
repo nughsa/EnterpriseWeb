@@ -18,6 +18,12 @@
             <li><a href="#">Penjualan</a></li>
             <li><a href="{{ url('laporan') }}">Laporan</a></li>
             <li><a href="#">Pengaturan</a></li>
+            <li>
+                <form action="{{url('logout')}}" methods="POST">
+                    @csrf
+                    <button type="submit" class="text-decoration-none bg-transparent border-0 text-white" style="font-size: 18px;">Logout</button>
+                </form>
+            </li>
         </ul>
     </div>
 

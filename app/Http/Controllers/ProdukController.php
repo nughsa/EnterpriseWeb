@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\produk;
+use App\Models\Produk;
 use App\Http\Requests\StoreprodukRequest;
 use App\Http\Requests\UpdateprodukRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth; // Pastikan hanya ini yang digunakan untuk Auth
 use Illuminate\Http\Request;
+
 
 class ProdukController extends Controller
 {
@@ -15,7 +17,11 @@ class ProdukController extends Controller
      */
     public function Viewproduk()
     {
-        $produk = Produk::all();
+        // $produk = Produk::all();
+        $isAdmin =Auth::user()->role=='admin';
+
+        $produk = $isAdmin ? Produk::all() : Produk::where('user_id', Auth::user()->id)->get();
+
         return view('produk',['produk'=> $produk]);
     }
     public function CreateProduk(Request $request)
@@ -32,10 +38,11 @@ class ProdukController extends Controller
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
             'jumlah_produk' => $request->jumlah_produk,
-            'image' => $imageName
+            'image' => $imageName,
+            'user_id' => Auth::user()->id
         ]);
 
-        return redirect('/produk');
+        return redirect(Auth::user()->role.'/produk');
     }
     public function ViewAddProduk()
     {
@@ -46,7 +53,7 @@ class ProdukController extends Controller
     {
         Produk :: where('kode_produk', $kode_produk)->delete();
 
-        return redirect('/produk');
+        return redirect(Auth::user()->role.'/produk');
     }
 
     //fungsi untuk view edit produk
@@ -75,7 +82,7 @@ class ProdukController extends Controller
             'image' => $imageName
         ]);
 
-        return redirect('/produk');
+        return redirect(Auth::user()->role.'/produk');
     }
 
     public function ViewLaporan()

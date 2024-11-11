@@ -17,6 +17,12 @@
             <li><a href="#">Penjualan</a></li>
             <li><a href="{{ url('laporan') }}">Laporan</a></li>
             <li><a href="#">Pengaturan</a></li>
+            <li>
+                <form action="{{url('logout')}}" methods="POST">
+                    @csrf
+                    <button type="submit" class="text-decoration-none bg-transparent border-0 text-white" style="font-size: 18px;">Logout</button>
+                </form>
+            </li>
         </ul>
     </div>
 
@@ -32,7 +38,7 @@
             <div class="container">
                 <h1>Create Produk</h1>
                 <!-- Form to create a new produk -->
-                <form action="{{url('/produk/add')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{url(Auth::user()->role.'/produk/add')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="nama_produk">Nama Produk</label>
