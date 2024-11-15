@@ -30,7 +30,7 @@ class ProdukController extends Controller
         if ($request->hasFile('image')){
             $imageFile = $request->file('image');
             $imageName = time().'_'.$imageFile->getClientOriginalName();
-            $imageFile -> storeAs('public/image', $imageName);
+            $imageFile -> storeAs('public/images', $imageName);
         }
 
         Produk::create([
@@ -70,7 +70,7 @@ class ProdukController extends Controller
         if ($request->hasFile('image')){
             $imageFile = $request->file('image');
             $imageName = time().'_'. $imageFile->getClientOriginalName();
-            $imageFile->storeAs('public/image', $imageName);
+            $imageFile->storeAs('public/images/', $imageName);
         }
 
 

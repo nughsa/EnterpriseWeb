@@ -13,15 +13,16 @@
     <div class="sidebar">
         <h2>Dashboard Penjualan</h2>
         <ul>
-            <li><a href="{{ url('contoh') }}">Home</a></li>
-            <li><a href="{{ url('produk') }}">Produk</a></li>
-            <li><a href="#">Penjualan</a></li>
-            <li><a href="{{ url('laporan') }}">Laporan</a></li>
-            <li><a href="#">Pengaturan</a></li>
+            <li><a href="{{ url(Auth::user()->role. '/contoh') }}">Home</a></li>
+                <li><a href="{{ url(Auth::user()->role.'/produk') }}">Produk</a></li>
+                <li><a href="{{ url(Auth::user()->role.'/laporan') }}">Laporan</a></li>
             <li>
-                <form action="{{url('logout')}}" methods="POST">
+            <li>
+                <form action="{{ url('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="text-decoration-none bg-transparent border-0 text-white" style="font-size: 18px;">Logout</button>
+                    <button type="submit" class="text-decoration-none bg-transparent border-0 text-white" style="font-size: 18px;" aria-label="Logout">
+                        Logout
+                    </button>
                 </form>
             </li>
         </ul>
@@ -57,7 +58,7 @@
                         @endforeach
                 </tbody>
             </table>
-            <a href="{{ url('report')}}" class="btn btn-secondary w-100 d-flex justify-content-center align-items-center text cursor-pointer">Export to PDF</a>
+            <a href="{{ url(Auth::user()->role.'/report')}}" class="btn btn-secondary w-100 d-flex justify-content-center align-items-center text cursor-pointer">Export to PDF</a>
         </div>
     </div>
     {{-- <script src="script.js"></script> --}}
